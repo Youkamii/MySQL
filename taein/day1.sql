@@ -1,9 +1,12 @@
+-- Day 1
+-- 프로그래머스: 아픈 동뭎 찾기
+
 SELECT ANIMAL_ID, NAME
 FROM ANIMAL_INS
 WHERE INTAKE_CONDITION = "Sick"
 ORDER BY ANIMAL_ID
 
-----------------------------------
+-- 프로그래머스: 중복 제거하기
 
 SELECT COUNT(DISTINCT NAME)
 FROM ANIMAL_INS
