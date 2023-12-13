@@ -1,0 +1,52 @@
+-- 코드를 입력하세요
+SELECT
+    WAREHOUSE_ID,
+    WAREHOUSE_NAME,
+    ADDRESS,
+    COALESCE(FREEZER_YN, 'N')
+FROM
+    FOOD_WAREHOUSE
+WHERE
+        ADDRESS LIKE '경기도%'
+ORDER BY
+    WAREHOUSE_ID
+
+
+-- 코드를 입력하세요
+SELECT
+    ANIMAL_ID,
+    NAME,
+    LEFT(DATETIME, 10)
+FROM
+    ANIMAL_INS
+ORDER BY
+    ANIMAL_ID
+
+
+-- 코드를 입력하세요
+SELECT
+    DR_NAME,
+    DR_ID,
+    MCDP_CD,
+    LEFT(HIRE_YMD, 10)
+FROM
+    DOCTOR
+WHERE
+        MCDP_CD = 'CS' OR MCDP_CD = 'GS'
+ORDER BY
+    HIRE_YMD DESC
+
+
+-- 코드를 입력하세요
+SELECT
+    PRODUCT_ID,
+    PRODUCT_NAME,
+    PRODUCT_CD,
+    CATEGORY,
+    PRICE
+FROM
+    FOOD_PRODUCT
+ORDER BY
+    PRICE DESC
+LIMIT 1
+
