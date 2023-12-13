@@ -1,0 +1,54 @@
+// 경기도에 위치한 식품창고 목록 출력하기
+
+SELECT
+    WAREHOUSE_ID,
+    WAREHOUSE_NAME,
+    ADDRESS,
+    COALESCE(FREEZER_YN, 'N')
+FROM
+    FOOD_WAREHOUSE
+WHERE
+        ADDRESS LIKE '경기도%'
+ORDER BY
+    WAREHOUSE_ID
+
+// DATETIME에서 DATE로 형 변환
+
+SELECT
+    ANIMAL_ID,
+    NAME,
+    LEFT(DATETIME, 10)
+FROM
+    ANIMAL_INS
+ORDER BY
+    ANIMAL_ID
+
+
+// 흉부외과 또는 일반외과 의사 목록 출력하기SELECT
+
+SELECT
+    DR_NAME,
+    DR_ID,
+    MCDP_CD,
+    LEFT(HIRE_YMD, 10)
+FROM
+    DOCTOR
+WHERE
+    MCDP_CD = 'CS' OR MCDP_CD = 'GS'
+ORDER BY
+    HIRE_YMD DESC
+
+
+//가격이 제일 비싼 식품의 정보 출력하기
+
+SELECT
+    PRODUCT_ID,
+    PRODUCT_NAME,
+    PRODUCT_CD,
+    CATEGORY,
+    PRICE
+FROM
+    FOOD_PRODUCT
+ORDER BY
+    PRICE DESC
+    LIMIT 1
