@@ -22,6 +22,7 @@ SELECT ANIMAL_ID, NAME, (
             END
         ) AS '중성화'
 FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;
 
 // 카테고리 별 상품 개수 구하기
 
