@@ -1,0 +1,60 @@
+-- 코드를 입력하세요
+SELECT
+    ANIMAL_TYPE,
+    COUNT(*) AS count
+FROM
+    ANIMAL_INS
+GROUP BY
+    ANIMAL_TYPE
+HAVING
+    ANIMAL_TYPE IN ('Cat', 'Dog')
+ORDER BY
+    ANIMAL_TYPE
+
+
+-- 코드를 입력하세요
+SELECT
+    MCDP_CD AS 진료과코드,
+    COUNT(*) AS 5월예약건수
+FROM
+    APPOINTMENT
+WHERE
+    APNT_YMD LIKE '2022-05%'
+GROUP BY
+    MCDP_CD
+ORDER BY
+    5월예약건수, MCDP_CD
+
+
+-- 코드를 입력하세요
+SELECT
+    CAST(SUBSTRING(DATETIME, 12, 2) AS DECIMAL) AS HOUR,
+    COUNT(*) AS COUNT
+FROM
+    ANIMAL_OUTS
+GROUP BY
+    HOUR
+HAVING
+    HOUR >= 9
+   AND
+    HOUR <= 19
+ORDER BY
+    HOUR
+
+
+-- 코드를 입력하세요
+SELECT
+    PT_NAME,
+    PT_NO,
+    GEND_CD,
+    AGE,
+    IFNULL(TLNO, 'NONE') AS TLNO
+FROM
+    PATIENT
+WHERE
+    AGE <= 12
+  AND
+    GEND_CD = 'W'
+ORDER BY
+    AGE DESC,
+    PT_NAME
