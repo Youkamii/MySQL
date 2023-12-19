@@ -123,10 +123,7 @@
 | 16회차(2023.12.28)  | ▶ [그룹별 조건에 맞는 식당 목록 출력하기](https://school.programmers.co.kr/learn/courses/30/lessons/131124)</br>▶ [오프라인/온라인 판매 데이터 통합하기](https://school.programmers.co.kr/learn/courses/30/lessons/131537)</br>▶ [조건에 부합하는 중고거래 댓글 조회하기](https://school.programmers.co.kr/learn/courses/30/lessons/164673)</br>▶ [입양 시각 구하기(2)](https://school.programmers.co.kr/learn/courses/30/lessons/59413)          |   |
 | 17회차(2024.1.2)  | ▶ [이름이 없는 동물의 아이디](https://school.programmers.co.kr/learn/courses/30/lessons/59039)</br>▶ [조건에 맞는 회원수 구하기](https://school.programmers.co.kr/learn/courses/30/lessons/131535)</br>▶ [카테고리 별 상품 개수 구하기](https://school.programmers.co.kr/learn/courses/30/lessons/131529)</br>▶ [중성화 여부 파악하기](https://school.programmers.co.kr/learn/courses/30/lessons/59409)          |   |
 | 18회차(2024.1.3)  | ▶ [준비중](https://drive.google.com/uc?export=view&id=1HgR45nUe9Mxt36eqY3GopnX59Id3w9NM)</br>▶ []()</br>▶ []()</br>▶ []()          |   |
-| 19회차(2024.1.4)  | ▶ [준비중](https://drive.google.com/uc?export=view&id=1b4tIogYWti5NuEP83gRnY3mxlI5j)</br>▶ []()</br>▶ []()</br>▶ []()          |   |
+| 19회차(2024.1.4)  | ▶ [준비중](https://drive.google.com/uc?export=view&id=1b4tIogYWti5NuEP83gRnY3mxlI5j-F-Q)</br>▶ []()</br>▶ []()</br>▶ []()          |   |
 | 20회차(2024.1.5)  | ▶ [준비중](https://drive.google.com/uc?export=view&id=1FbhDf208k7OjzRlZMeYkmLGLOjceTkJz)</br>▶ []()</br>▶ []()</br>▶ []()          |  |
-
-
-
 
 
