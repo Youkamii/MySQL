@@ -1,0 +1,19 @@
+
+
+
+
+
+-- 상위 n개 레코드
+SELECT NAME
+FROM ANIMAL_INS
+ORDER BY DATETIME
+LIMIT 1
+
+// LIMIT: 특정 행만 조회하기 위한 구문
+// LIMIT 1: 첫 번째 행, LIMIT 3,5: 3~5 번째 행
+
+-- 12세 이하인 여자 환자 목록 출력하기
+SELECT PT_NAME, PT_NO, GEND_CD, AGE, IFNULL(TLNO, 'NONE') AS TLNO
+FROM PATIENT
+WHERE AGE <= 12 AND GEND_CD = 'W'
+ORDER BY AGE DESC, PT_NAME ASC;
