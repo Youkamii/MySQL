@@ -1,0 +1,74 @@
+년, 월, 성별 별 상품 구매 회원 수 구하기
+SELECT
+    YEAR(OS.SALES_DATE) AS YEAR,
+    MONTH(OS.SALES_DATE) AS MONTH,
+    CASE
+        WHEN UI.GENDER = 0 THEN '0'
+        WHEN UI.GENDER = 1 THEN '1'
+        END AS GENDER,
+    COUNT(DISTINCT UI.USER_ID) AS USERS
+FROM
+    USER_INFO UI
+        JOIN
+    ONLINE_SALE OS
+    ON
+            UI.USER_ID = OS.USER_ID
+WHERE
+    UI.GENDER IS NOT NULL
+GROUP BY
+    YEAR(OS.SALES_DATE),
+    MONTH(OS.SALES_DATE),
+    UI.GENDER
+ORDER BY
+    YEAR(OS.SALES_DATE),
+    MONTH(OS.SALES_DATE),
+    UI.GENDER;
+
+서울에 위치한 식당 목록 출력하기
+SELECT
+    i.REST_ID, i.REST_NAME, i.FOOD_TYPE, i.FAVORITES, i.ADDRESS, ROUND(AVG(r.REVIEW_SCORE), 2) AS SCORE
+FROM
+    REST_INFO i
+        JOIN
+    REST_REVIEW r ON i.REST_ID = r.REST_ID
+WHERE
+        i.ADDRESS LIKE '서울%'
+GROUP BY
+    i.REST_ID, i.REST_NAME, i.FOOD_TYPE, i.FAVORITES, i.ADDRESS
+ORDER BY
+    SCORE DESC, i.FAVORITES DESC;
+
+헤비 유저가 소유한 장소
+SELECT
+    P.ID,
+    P.NAME,
+    P.HOST_ID
+FROM
+    PLACES P
+WHERE
+        P.HOST_ID IN (
+        SELECT
+            HOST_ID
+        FROM
+            PLACES
+        GROUP BY
+            HOST_ID
+        HAVING
+                COUNT(ID) >= 2)
+ORDER BY
+    P.ID;
+우유와 요거트가 담긴 장바구니
+SELECT
+    C1.CART_ID
+FROM
+    CART_PRODUCTS C1
+        JOIN
+    CART_PRODUCTS C2
+    ON
+            C1.CART_ID = C2.CART_ID
+WHERE
+        C1.NAME = 'Milk' AND C2.NAME = 'Yogurt'
+GROUP BY
+    C1.CART_ID
+ORDER BY
+    C1.CART_ID;
