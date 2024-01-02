@@ -1,0 +1,55 @@
+// 상품 별 오프라인 매출 구하기
+
+SELECT
+    PRODUCT_CODE,
+    SUM(PRICE * SALES_AMOUNT) AS SALES
+FROM
+    PRODUCT
+        INNER JOIN OFFLINE_SALE
+                   ON PRODUCT.PRODUCT_ID = OFFLINE_SALE.PRODUCT_ID
+GROUP BY
+    PRODUCT_CODE
+ORDER BY
+    SALES DESC,
+    PRODUCT_CODE
+
+// 있었는데요 없었습니다
+
+SELECT
+    ai.ANIMAL_ID, ai.NAME
+FROM
+    ANIMAL_INS ai
+        INNER JOIN ANIMAL_OUTS ao
+                   ON ai.ANIMAL_ID = ao.ANIMAL_ID
+WHERE
+        ai.DATETIME > ao.DATETIME
+ORDER BY
+    ai.DATETIME
+
+// 오랜 기간 보호한 동물(2)
+
+SELECT
+    ao.ANIMAL_ID,
+    ao.NAME
+FROM
+    ANIMAL_INS ai INNER JOIN
+    ANIMAL_OUTS ao
+    ON ai.ANIMAL_ID = ao.ANIMAL_ID
+ORDER BY
+    ( ao.DATETIME - ai.DATETIME ) DESC
+    LIMIT 2
+
+// 조건에 맞는 도서와 저자 리스트 출력하기
+
+SELECT
+    BOOK_ID,
+    AUTHOR_NAME,
+    DATE_FORMAT(PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM
+    BOOK b INNER JOIN
+    AUTHOR a
+    ON b.AUTHOR_ID = a.AUTHOR_ID
+WHERE
+        CATEGORY = '경제'
+ORDER BY
+    PUBLISHED_DATE
