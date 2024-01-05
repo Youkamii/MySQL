@@ -1,0 +1,136 @@
+-- 코드를 입력하세요
+WITH t1 AS (
+    SELECT
+        CAR_ID,
+        CAR_TYPE,
+        DAILY_FEE
+    FROM
+        CAR_RENTAL_COMPANY_CAR
+    WHERE
+        CAR_TYPE IN ('세단', 'SUV')
+), t2 AS (
+    SELECT
+        CAR_ID, MAX(END_DATE) AS MAX_DAY
+    FROM
+        CAR_RENTAL_COMPANY_RENTAL_HISTORY
+    GROUP BY
+        CAR_ID
+    HAVING
+        MAX(END_DATE) >= '2022-11-04'
+), t3 AS (
+    SELECT
+        CAR_TYPE,
+        CAST(REPLACE(DISCOUNT_RATE, '%', '') AS UNSIGNED) AS DISCOUNT_RATE
+    FROM
+        CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+    WHERE
+        REPLACE(DURATION_TYPE, '일 이상', '') = '30'
+)
+
+SELECT
+    CAR_ID,
+    t1.CAR_TYPE,
+    CAST(DAILY_FEE * 0.01 * (100 -  DISCOUNT_RATE) * 30 AS UNSIGNED) AS FEE
+FROM
+    t1 JOIN t3
+            ON t1.CAR_TYPE = t3.CAR_TYPE
+WHERE
+    CAR_ID NOT IN
+    (
+        SELECT
+            CAR_ID
+        FROM
+            t2
+    )
+HAVING
+    FEE >= 500000
+   AND
+    FEE < 2000000
+ORDER BY
+    FEE DESC,
+    CAR_TYPE,
+    CAR_ID DESC
+
+
+-- 코드를 입력하세요
+    WITH t1 AS (
+    SELECT
+        CAR_ID,
+        CAR_TYPE,
+        DAILY_FEE
+    FROM
+        CAR_RENTAL_COMPANY_CAR
+    WHERE
+        CAR_TYPE = '트럭'
+), t2 AS (
+    SELECT
+        HISTORY_ID,
+        CAR_ID,
+        DATEDIFF(END_DATE, START_DATE)+1 AS DAYS,
+        CASE
+            WHEN DATEDIFF(END_DATE, START_DATE)+1 < 7 THEN 0
+            WHEN DATEDIFF(END_DATE, START_DATE)+1 < 30 THEN 7
+            WHEN DATEDIFF(END_DATE, START_DATE)+1 < 90 THEN 30
+            ELSE 90
+        END AS DURATION_TYPE
+    FROM
+        CAR_RENTAL_COMPANY_RENTAL_HISTORY
+), t3 AS (
+    SELECT
+        CAR_TYPE,
+        CAST(REPLACE(DURATION_TYPE, '일 이상', '') AS UNSIGNED) AS DURATION_TYPE,
+        CAST(REPLACE(DISCOUNT_RATE, '%', '') AS UNSIGNED) AS DISCOUNT_RATE
+    FROM
+        CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+    WHERE
+        CAR_TYPE = '트럭'
+)
+
+SELECT
+    t2.HISTORY_ID,
+    CASE
+        WHEN DISCOUNT_RATE IS NOT NULL
+            THEN FLOOR(DAILY_FEE * 0.01 * (100 - DISCOUNT_RATE) * DAYS)
+        ELSE DAILY_FEE * DAYS
+        END AS FEE
+FROM
+    t1 JOIN t2
+            ON t1.CAR_ID = t2.CAR_ID
+       LEFT OUTER JOIN t3
+                       ON t2.DURATION_TYPE = t3.DURATION_TYPE
+ORDER BY
+    FEE DESC,
+    HISTORY_ID DESC
+
+
+-- 코드를 입력하세요
+    WITH t1 AS (
+    SELECT
+        USER_ID
+    FROM
+        USER_INFO
+    WHERE
+        YEAR(JOINED) = '2021'
+), t2 AS (
+    SELECT
+        COUNT(USER_ID) AS TOTAL
+    FROM
+        USER_INFO
+    WHERE
+        YEAR(JOINED) = '2021'
+)
+
+SELECT
+    YEAR(SALES_DATE) AS YEAR,
+    MONTH(SALES_DATE) AS MONTH,
+    COUNT(DISTINCT t3.USER_ID) AS PUCHASED_USERS,
+    ROUND(COUNT(DISTINCT t3.USER_ID)/(SELECT TOTAL FROM t2), 1) AS PUCHASED_RATIO
+FROM
+    t1 JOIN ONLINE_SALE t3
+ON t1.USER_ID = t3.USER_ID
+GROUP BY
+    YEAR,
+    MONTH
+ORDER BY
+    YEAR,
+    MONTH
